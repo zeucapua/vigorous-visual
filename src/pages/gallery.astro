@@ -1,0 +1,9 @@
+---
+import { db, Drawing } from "astro:db";
+
+const drawings = await db.select().from(Drawing);
+---
+
+{ drawings.map((drawing) => (
+  <img src={drawing.data} />
+))}
