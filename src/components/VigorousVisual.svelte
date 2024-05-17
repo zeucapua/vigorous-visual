@@ -3,8 +3,7 @@
   import { actions } from "astro:actions";
 
   let formStatus: "initial" | "loading" | "success" | "error" = "initial";
-  let isEditing = false;
-  let isCopied = false;
+  let variant: string;
 
   let canvasElement: HTMLCanvasElement;
   let containerElement: HTMLElement;
@@ -25,7 +24,7 @@
     formStatus = "loading";
 
     await actions.submitDrawing({
-      variant: "svelte",
+      variant,
       data: badgeImgUrl
     });
 
@@ -56,6 +55,8 @@
       <input type="radio" id="color-green" name="color" value="green" 
         bind:group={color}
       />
+
+      <input type="text" bind:value={variant} class="border" />
       
       <button type="submit">Submit</button>
     </fieldset>
